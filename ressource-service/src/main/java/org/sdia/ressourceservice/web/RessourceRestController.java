@@ -1,10 +1,8 @@
 package org.sdia.ressourceservice.web;
 
 import lombok.AllArgsConstructor;
-import org.sdia.ressourceservice.dao.RessourceRepository;
 import org.sdia.ressourceservice.dto.RessourceRequestDTO;
 import org.sdia.ressourceservice.dto.RessourceResponseDTO;
-import org.sdia.ressourceservice.entities.Ressource;
 import org.sdia.ressourceservice.mappers.RessourceMapper;
 import org.sdia.ressourceservice.service.RessourceService;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +40,6 @@ public class RessourceRestController {
     public List<RessourceResponseDTO> ressourcesList(){
         return ressourceService.allRessources();
     }
-
 
 
 }
