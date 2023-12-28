@@ -14,4 +14,6 @@ public interface RessourceService {
     public List<RessourceResponseDTO> allRessources();
 
     public void deleteRessourcer(Long id);
+
+    public RessourceResponseDTO ressourcesById(Long id);
 }
