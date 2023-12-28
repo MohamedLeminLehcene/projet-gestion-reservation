@@ -70,4 +70,13 @@ public class RessourceServiceImpl implements RessourceService {
     public void deleteRessourcer(Long id) {
                 ressourceRepository.deleteById(id);
     }
+
+    @Override
+    public RessourceResponseDTO ressourcesById(Long id) {
+        Ressource ressource = ressourceRepository.findById(id).orElseThrow(() -> new RuntimeException("Not Found"));
+
+        RessourceResponseDTO ressourceResponseDTO = ressourceMapper.fromRessource(ressource);
+
+        return ressourceResponseDTO;
+    }
 }
