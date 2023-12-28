@@ -36,10 +36,15 @@ public class RessourceRestController {
         ressourceService.deleteRessourcer(id);
     }
 
+
     @GetMapping("/ressources")
     public List<RessourceResponseDTO> ressourcesList(){
         return ressourceService.allRessources();
     }
 
 
+    @GetMapping("/ressources/{id}")
+    public RessourceResponseDTO ressourcesById(@PathVariable Long id){
+        return ressourceService.ressourcesById(id);
+    }
 }
