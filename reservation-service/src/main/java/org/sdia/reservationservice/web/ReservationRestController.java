@@ -2,6 +2,7 @@ package org.sdia.reservationservice.web;
 
 import lombok.AllArgsConstructor;
 import org.sdia.reservationservice.dto.*;
+import org.sdia.reservationservice.entities.Reservation;
 import org.sdia.reservationservice.mappers.ReservationMapper;
 import org.sdia.reservationservice.service.ReservationService;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/api")
 public class ReservationRestController {
 
     private final ReservationService reservationService;
@@ -36,4 +38,14 @@ public class ReservationRestController {
         reservationService.deleteReservation(id);
     }
 
+    @GetMapping("/reservations/personne/{personId}")
+    public List<Reservation> getReservationsByPersonId(@PathVariable Long personId) {
+        return reservationService.getReservationsByPersonId(personId);
+    }
+
+
+    @GetMapping("/reservations/ById/{reservationId}")
+    public ReservationResponseDTO reservationByIdDetail(@PathVariable Long reservationId) {
+        return reservationService.reservationByIdDetail(reservationId);
+    }
 }
