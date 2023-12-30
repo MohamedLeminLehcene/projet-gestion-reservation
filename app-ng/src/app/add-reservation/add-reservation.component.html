@@ -1,0 +1,42 @@
+<div class="container">
+    <br>
+    <h2> Add Personne</h2>
+
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <a class="btn btn-danger" (click)="cancelBtn()">Cancel</a>
+        </div>
+        <div class="card-body">
+
+            <form #addForm="ngForm" (ngSubmit)="onAddReservation(addForm)">
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text"  ngModel name="nom" class="form-control" id="nom" placeholder="Nom reservation" required>
+                </div>
+                <div class="mb-3">
+                    <label for="contexte" class="form-label">Contexte</label>
+                    <input type="text"  ngModel name="contexte" class="form-control" id="contexte" placeholder="Contexte de reservation" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="dure" class="form-label">Durée</label>
+                    <input type="text"  ngModel name="dure" class="form-control" id="dure" placeholder="Dure de reservation" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="ressourceId" class="form-label">Ressource Id </label>
+                    <input type="number"  ngModel name="ressourceId" class="form-control" id="ressourceId"  required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="personneId" class="form-label">Personne </label>
+                    <input type="number" class="form-control" id="personneId"  ngModel="{{personneId}}" name="personneId" name="personneId" >
+                </div>
+
+                <button [disabled]="addForm.invalid"  type="submit" class="btn btn-primary">Ok</button>
+            </form>
+
+        </div>
+    </div>
+</div>

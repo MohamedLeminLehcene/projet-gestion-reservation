@@ -1,0 +1,25 @@
+<div class="container">
+  <br>
+  <h2> Add Personne</h2>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <a class="btn btn-danger" (click)="cancelBtn()">Cancel</a>
+    </div>
+    <div class="card-body">
+
+      <form #addForm="ngForm" (ngSubmit)="onAddPersonne(addForm)">
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text"  ngModel name="nom" class="form-control" id="nom" placeholder="Nom personne" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email"  ngModel name="email" class="form-control" id="email" placeholder="Email personne" required>
+        </div>
+
+        <button [disabled]="addForm.invalid"  type="submit" class="btn btn-primary">Ok</button>
+      </form>
+
+    </div>
+  </div>
+</div>

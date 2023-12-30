@@ -1,0 +1,27 @@
+<div class="container">
+  <br>
+  <h2> Update Infos Personne</h2>
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <a class="btn btn-danger" (click)="cancelBtn()">Cancel</a>
+    </div>
+    <div class="card-body">
+
+      <form #updateForm="ngForm" (ngSubmit)="onUpdatePersonne(updateForm)">
+
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text"   class="form-control" id="nom" ngModel="{{personneUpdate?.nom}}" name="nom"  >
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email"  class="form-control" id="email" ngModel="{{personneUpdate?.email}}" name="email"  >
+        </div>
+
+        <button [disabled]="updateForm.invalid"  type="submit" class="btn btn-primary">Ok</button>
+      </form>
+
+
+    </div>
+  </div>
+</div>

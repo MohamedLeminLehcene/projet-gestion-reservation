@@ -1,0 +1,37 @@
+<div class="container">
+    <br>
+    <h2>List des Reservations </h2>
+    <div class="card">
+
+
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Contexte</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Duree</th>
+                    <th scope="col">Operations</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let r of reservations">
+                    <th scope="row">{{r.id}}</th>
+                    <td>{{r.nom}}</td>
+                    <td>{{r.contexte}}</td>
+                    <td>{{r.date}}</td>
+                    <td>{{r.dure}}</td>
+                    <td>
+                        <button class="btn btn-sm btn-danger m-1" (click)="deleteReservation(r)">DELETE</button>
+                        <button class="btn btn-sm btn-success m-1" (click)="updateReservation(r)">UPDATE</button>
+                        <button class="btn btn-sm btn-info"  (click)="detailReservation(r)">Details</button>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
