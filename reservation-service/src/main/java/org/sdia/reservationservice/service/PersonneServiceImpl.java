@@ -76,9 +76,27 @@ public class PersonneServiceImpl implements PersonneService{
         return  personneResponseDTOList;
     }
 
-    /*
+
     @Override
-    public List<ReservationResponseDTO> allPeronnes() {
+    public void deletePersonne(Long id) {
+            personneRepository.deleteById(id);
+    }
+
+    @Override
+    public PersonneResponseDTO personneById(Long id) {
+
+        Personne personne = personneRepository.findById(id).orElseThrow();
+
+        PersonneResponseDTO personneResponseDTO = personneMapper.fromPersonne(personne);
+
+        return personneResponseDTO;
+    }
+}
+
+
+/*
+    @Override
+    public List<ReservationResponseDTO> allPeronnes2() {
 
         Personne personne = personneRepository.findById(1L)
                 .orElseThrow(() -> new EntityNotFoundException("Personne with ID 1 not found"));
@@ -104,10 +122,4 @@ public class PersonneServiceImpl implements PersonneService{
 
         return reservationList;
     }
-     */
-
-    @Override
-    public void deletePersonne(Long id) {
-            personneRepository.deleteById(id);
-    }
-}
+ */
