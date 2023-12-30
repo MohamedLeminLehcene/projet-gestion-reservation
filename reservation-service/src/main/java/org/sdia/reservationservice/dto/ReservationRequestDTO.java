@@ -2,6 +2,7 @@ package org.sdia.reservationservice.dto;
 
 
 import lombok.*;
+import org.sdia.reservationservice.entities.Personne;
 
 import java.util.Date;
 
@@ -11,5 +12,6 @@ public class ReservationRequestDTO {
     private String contexte;
     private String dure;
     private Long ressourceId;
-    private Long perssoneId;
+    private Long personneId;
 }
+
