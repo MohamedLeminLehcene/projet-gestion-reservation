@@ -3,7 +3,6 @@ package org.sdia.reservationservice.service;
 import lombok.AllArgsConstructor;
 import org.sdia.reservationservice.dao.PersonneRepository;
 import org.sdia.reservationservice.dao.ReservationRepository;
-import org.sdia.reservationservice.dto.PersonneResponseDTO;
 import org.sdia.reservationservice.dto.ReservationRequestDTO;
 import org.sdia.reservationservice.dto.ReservationResponseDTO;
 import org.sdia.reservationservice.dto.RessourceResponseDTO;
@@ -11,8 +10,14 @@ import org.sdia.reservationservice.entities.Personne;
 import org.sdia.reservationservice.entities.Reservation;
 import org.sdia.reservationservice.mappers.ReservationMapper;
 import org.sdia.reservationservice.model.Ressource;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.client.RestClient;
 
 import java.util.Date;
 import java.util.List;
@@ -87,11 +92,20 @@ public class ReservationServiceImpl implements ReservationService{
     @Override
     public List<Reservation> getReservationsByPersonId(Long personId) {
 
+
         List<Reservation> reservationList = reservationRepository.findByPersonneId(personId);
 
         reservationList.forEach(reservation -> {
 
-            RessourceResponseDTO ressourceResponseDTO = ressourceRestClientController.ressourcesById(reservation.getRessourceId());
+            String jwtTokenValue= getUserInfo();
+
+            RestClient restClient = RestClient.create("http://localhost:8081");
+
+            RessourceResponseDTO ressourceResponseDTO = restClient.get()
+                    .uri("/api/ressources/"+reservation.getRessourceId()+"?projection=fullRessource")
+                    .headers(httpHeaders -> httpHeaders.set(HttpHeaders.AUTHORIZATION, "Bearer "+jwtTokenValue))
+                    .retrieve()
+                    .body(new ParameterizedTypeReference<>(){});
 
             Ressource ressource = new Ressource();
             ressource.setId(ressourceResponseDTO.getId());
@@ -106,6 +120,21 @@ public class ReservationServiceImpl implements ReservationService{
 
         return reservationList;
 
+    }
+
+    public String getUserInfo() {
+        // Retrieve the authentication object from the SecurityContext
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Check if the user is authenticated
+        if (authentication.isAuthenticated() && authentication instanceof JwtAuthenticationToken) {
+            // Extract JWT from JwtAuthenticationToken
+            JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) authentication;
+            return jwtAuthenticationToken.getToken().getTokenValue();
+        }
+
+        // Return an error message if the user is not authenticated or the token is not a JWT
+        return "Error retrieving user information";
     }
 
 
