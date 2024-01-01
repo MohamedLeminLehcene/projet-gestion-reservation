@@ -19,5 +19,7 @@ public class GatewayServiceApplication {
         return new DiscoveryClientRouteDefinitionLocator(rdc,dlp);
     }
 
+
+
 }
 
