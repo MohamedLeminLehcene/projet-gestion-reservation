@@ -10,6 +10,9 @@ import org.sdia.reservationservice.entities.Personne;
 import org.sdia.reservationservice.entities.Reservation;
 import org.sdia.reservationservice.mappers.PersonneMapper;
 import org.sdia.reservationservice.service.PersonneService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -54,6 +57,7 @@ public class PersonneRestController {
     public PersonneResponseDTO personneById(@PathVariable Long id){
      return  personneService.personneById(id);
     }
+
 
 }
 
