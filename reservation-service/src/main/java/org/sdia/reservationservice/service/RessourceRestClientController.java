@@ -18,9 +18,5 @@ public interface RessourceRestClientController {
     @GetMapping("/api/ressources/{id}?projection=fullRessource")
     public RessourceResponseDTO ressourcesById(@PathVariable Long id);
 
-   /*
-    @GetMapping("/ressources")
-    public List<RessourceResponseDTO> ressourcesList();
-    */
 
 }
